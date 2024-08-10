@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,6 +34,13 @@ public class Patient {
     private String email;
     private String phone;
     private LocalDate dob;
+    private String address;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "patient-illness",
+        joinColumns = { @JoinColumn(name = "patient_id")},
+        inverseJoinColumns = {@JoinColumn(name = "illness_id")})
+    List<Illness> illnesses;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
