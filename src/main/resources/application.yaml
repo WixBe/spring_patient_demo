@@ -1,3 +1,29 @@
 spring:
   application:
     name: patient_demo
+  datasource:
+    url: jdbc:h2:mem:patients
+    driverClassName: org.h2.Driver
+    username: root
+    password: root
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+logging:
+  level:
+    org:
+      hibernate: ERROR
+      springframework:
+        web: DEBUG
+  file:
+    name: dev.log
+  pattern:
+    file: %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{project}] [%thread] %-5level %logger{36} - %msg%n
+
+server:
+  port: 8100
+
+
